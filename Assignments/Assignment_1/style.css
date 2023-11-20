@@ -1,0 +1,27 @@
+body{
+    border: 5px double black;
+    width: 50%;
+    margin-left: 20%;
+    padding: 2% 5% 5% 5%;
+    
+}
+
+.header{
+    width: 50%;
+}
+
+.profile-img{
+    width: 30%;
+    
+}
+.img-td{
+    margin-right: 80%;
+}
+
+h3{
+    color: royalblue;
+}
+
+hr{
+    color: royalblue;
+}
