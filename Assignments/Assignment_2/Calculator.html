@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      h1 {
+        text-decoration: underline;
+      }
+      table {
+        padding: 2%;
+        width: 500px;
+        margin-left: 8%;
+      }
+      td {
+        padding: 1%;
+      }
+      input {
+        width: 141px;
+      }
+      button {
+        margin: 0.5%;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <div>
+        <h1>Calculator</h1>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><label for="num1">Enter Number 1 : </label></td>
+              <td style="width: 150px">
+                <input required type="number" name="num1" id="num1" />
+              </td>
+              <td>
+                <div id="num1Error" style="width: 100x; color: red"></div>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="num2">Enter Number 2 : </label></td>
+              <td><input required type="number" name="num2" id="num2" /></td>
+              <td style="width: 100px">
+                <div id="num2Error" style="width: 100x; color: red"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>Result:</td>
+              <td>
+                <div
+                  id="result"
+                  style="width: 147px; height: 19px; border: 1px solid black"
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button onclick="validate();calculator('add')">Addition</button>
+          <button onclick="validate();calculator('sub')">Subtraction</button>
+          <button onclick="validate();calculator('mul')">Multiplication</button>
+          <button onclick="validate();calculator('div')">Division</button>
+          <button onclick="reset()">Reset</button>
+        </div>
+      </div>
+    </center>
+    <script src="validations.js"></script>
+    <script>
+      function validate() {
+        validateForEmpty("num1", "num1Error", "Enter num1");
+        validateForEmpty("num2", "num2Error", "Enter num2");
+      }
+      function calculator(operator) {
+        var num1 = document.getElementById("num1").value;
+        var num2 = document.getElementById("num2").value;
+        var res = document.getElementById("result");
+        switch (operator) {
+          case "add":
+            console.log(parseInt(num1) + parseInt(num2));
+            res.innerText = parseInt(num1) + parseInt(num2);
+            break;
+          case "sub":
+            res.innerText = parseInt(num1) - parseInt(num2);
+            break;
+          case "mul":
+            res.innerText = parseInt(num1) * parseInt(num2);
+            break;
+          case "div":
+            res.innerText = parseInt(num1) / parseInt(num2);
+            break;
+          default:
+            break;
+        }
+      }
+      function reset() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").innerText = "";
+      }
+    </script>
+  </body>
+</html>

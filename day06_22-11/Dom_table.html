@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dom Table</title>
+  </head>
+  <style>
+    input {
+      margin: 0.5%;
+    }
+    table {
+      width: 30%;
+    }
+  </style>
+  <body>
+    <center>
+      <h2>Enter Data</h2>
+
+      <input id="name" type="text" placeholder="Enter your Name" />
+      <input id="city" type="text" placeholder="Enter your City" />
+      <label for="time">Enter Time</label>
+      <input id="time" type="time" />
+      <br />
+      <br />
+      <input type="button" value="Add Record" onclick="Add()" />
+      <input type="button" value="Reset" onclick="Reset()" />
+      <input type="button" value="Delete All Records" onclick="DeleteAll()" />
+      <input
+        type="button"
+        value="Delete First Record"
+        onclick="DeleteFirst()"
+      />
+      <input type="button" value="Delete Last Record" onclick="DeleteLast()" />
+      <hr />
+      <table border="1">
+        <thead>
+          <th>No</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Time</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <script>
+        var counter = 1;
+        function Add() {
+          var tbodyRef = document.getElementsByTagName("tbody");
+          var name = document.getElementById("name");
+          var city = document.getElementById("city");
+          var time = document.getElementById("time");
+          var row =
+            ` <tr id= ` +
+            counter +
+            `
+             onmouseover="Execute(` +
+            counter +
+            `
+            )" onmouseout="Revert(` +
+            counter +
+            `)">
+          <td id=` +
+            (counter + 100) +
+            `>` +
+            counter +
+            `</td>
+          <td>` +
+            name.value +
+            `</td>
+          <td>` +
+            city.value +
+            `</td>
+          <td>` +
+            time.value +
+            `</td>
+        </tr>`;
+          tbodyRef[0].innerHTML = tbodyRef[0].innerHTML + row;
+          counter++;
+        }
+
+        function Reset() {
+          var tbody = document.getElementById("tbody");
+          var name = document.getElementById("name");
+          var city = document.getElementById("city");
+          var time = document.getElementById("time");
+          city.value = "";
+          name.value = "";
+          time.value = "";
+        }
+
+        function DeleteAll() {
+          var tbody = document.getElementById("tbody");
+          tbody.innerHTML = "";
+        }
+
+        // function DeleteFirst() {
+        //   var first = document.getElementById(1);
+        //   first.innerHTML = "";
+        //   first.id.innerHTML = 0;
+        //   first.id = 0;
+        //   for (let index = 2; index <= counter; index++) {
+        //     var temp = document.getElementById(index + 100);
+        //     temp.innerText = temp.innerText - 1;
+        //     temp.id = index + 100 - 1;
+        //   }
+        //   counter--;
+        // }
+
+        function DeleteFirst() {
+          var first = document.getElementById("tbody");
+          first.firstElementChild.innerHTML = "";
+
+          counter--;
+        }
+
+        function DeleteLast() {
+          var last = document.getElementById("tbody").lastChild;
+          last.innerHTML = "";
+          counter--;
+        }
+        function Execute(id) {
+          document.getElementById(id).style.backgroundColor = "#d3d3d3";
+        }
+        function Revert(id) {
+          document.getElementById(id).style.backgroundColor = "white";
+        }
+      </script>
+    </center>
+  </body>
+</html>

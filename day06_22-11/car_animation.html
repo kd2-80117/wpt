@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Animations</title>
+  </head>
+  <body>
+    <img id="img" style="margin-left: 0px" src="car.png" alt="" srcset="" />
+
+    <div>
+      <button onclick="Accelerate(10)">Go 1 Gear</button>
+      <button onclick="Accelerate(30)">Go 2 Gear</button>
+      <button onclick="Accelerate(50)">Go 3 Gear</button>
+
+      <button onclick="Reverse(10)">Reverse 1 Gear</button>
+      <button onclick="Reverse(30)">Reverse 2 Gear</button>
+      <button onclick="Reverse(50)">Reverse 3 Gear</button>
+    </div>
+    <script>
+      var counter = 0;
+      function Accelerate(num) {
+        counter = counter + num;
+        var a = document.getElementById("img");
+        a.style.marginLeft = counter + "px";
+      }
+      function Reverse(num) {
+        counter = counter - num;
+        var a = document.getElementById("img");
+        a.style.marginLeft = counter + "px";
+      }
+    </script>
+  </body>
+</html>
