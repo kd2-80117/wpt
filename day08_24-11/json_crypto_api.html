@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto</title>
   </head>
+  <style>
+    img {
+      width: 30%;
+      height: 20%;
+    }
+  </style>
   <body>
     <center>
+      <div id="loading">
+        <h1>Loading</h1>
+        <img src="loading.gif" alt="" />
+      </div>
       <h1>CryptoCurrency</h1>
       <table border="1">
         <thead>
@@ -19,10 +29,10 @@
       </table>
     </center>
     <script>
-      debugger;
       var helper = new XMLHttpRequest();
       helper.onreadystatechange = () => {
         if (helper.readyState == 4 && helper.status == 200) {
+          document.getElementById("loading").style.display = "none";
           var entireData = JSON.parse(helper.responseText).rates;
           var coin = Object.values(entireData);
 
