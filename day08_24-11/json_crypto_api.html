@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto</title>
+  </head>
+  <body>
+    <center>
+      <h1>CryptoCurrency</h1>
+      <table border="1">
+        <thead>
+          <th>Name</th>
+          <th>Unit</th>
+          <th>Value</th>
+          <th>Type</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </center>
+    <script>
+      debugger;
+      var helper = new XMLHttpRequest();
+      helper.onreadystatechange = () => {
+        if (helper.readyState == 4 && helper.status == 200) {
+          var entireData = JSON.parse(helper.responseText).rates;
+          var coin = Object.values(entireData);
+
+          var tbody = document.getElementById("tbody");
+          for (let index = 0; index < coin.length; index++) {
+            var coins = coin[index];
+            var row = ` <tr>
+                <td>${coins.name}</td>
+                <td>${coins.unit}</td>
+                <td>${coins.value}</td>
+                <td>${coins.type}</td>
+            </tr>`;
+            tbody.innerHTML = tbody.innerHTML + row;
+          }
+        }
+      };
+      helper.open("GET", "https://api.coingecko.com/api/v3/exchange_rates");
+      helper.send();
+    </script>
+  </body>
+</html>

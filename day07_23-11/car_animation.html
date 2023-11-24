@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Animations</title>
+  </head>
+  <style>
+    img {
+      width: 15%;
+      position: absolute;
+    }
+    .road {
+      width: 50%;
+      height: 40%;
+    }
+    .car {
+      top: 25%;
+    }
+  </style>
+  <body onkeydown="keyFunction(event)">
+    <div>
+      <img id="roadId" class="road" src="road.jpg" alt="" />
+      <img id="carId" class="car" src="car-gif-png-1.gif" alt="" />
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <div>
+      <button id="accBtn" onclick="Accelerate()">Accelerate</button>
+      <span>or Press "A" or "a" to Accelerate</span>
+      <br />
+      <br />
+      <button id="revBtn" onclick="Reverse()">Reverse</button>
+      <span>or Press "R" or "r" to Reverse</span>
+      <br />
+      <br />
+      <button id="brakeBtn" disabled onclick="Brake()">Brake</button>
+      <span>or Press "B" or "b" to Brake</span>
+      <br />
+      <br />
+      <button id="stopBtn" disabled onclick="HandBrake()">Stop</button>
+      <span>or Press "S" or "s" to Stop</span>
+      <br />
+      <br />
+    </div>
+    <script>
+      var counter = 0;
+      var downCounter = 200;
+      var tokenArray = new Array();
+      var downArray = new Array();
+      var revArray = new Array();
+
+      function forward() {
+        counter = counter + 1;
+        var a = document.getElementById("carId");
+        a.style.left = counter + "px";
+        if (counter > 570) {
+          for (let index = 0; index < tokenArray.length; index++) {
+            var token = tokenArray.pop();
+            window.clearInterval(token);
+            a.style.rotate = "30deg";
+            var downToken = window.setInterval(down, 100);
+            var token = window.setInterval;
+            downArray.push(downToken);
+          }
+        }
+      }
+      function backward() {
+        counter = counter - 1;
+        var a = document.getElementById("carId");
+        a.style.left = counter + "px";
+      }
+
+      function down() {
+        downCounter = downCounter + 1;
+        console.log(downCounter);
+        var a = document.getElementById("carId");
+        a.style.top = downCounter + "px";
+        if (downCounter > 480) {
+          for (let index = 0; index < downArray.length; index++) {
+            var token = downArray.pop();
+            window.clearInterval(token);
+
+            for (let index = 0; index < 4; index++) {
+              window.setTimeout(() => {
+                a.style.rotate = "60deg";
+                a.style.rotate = "90deg";
+                a.style.rotate = "120deg";
+                a.style.rotate = "180deg";
+              }, 100);
+            }
+
+            // var downToken = window.setInterval(down, 100);
+            // downArray.push(downToken);
+          }
+        }
+      }
+      function Accelerate() {
+        document.getElementById("brakeBtn").disabled = null;
+        document.getElementById("stopBtn").disabled = null;
+        var token = window.setInterval(forward, 100);
+        tokenArray.push(token);
+      }
+      function Reverse() {
+        document.getElementById("brakeBtn").disabled = null;
+        document.getElementById("stopBtn").disabled = null;
+        handBrake();
+        var token = window.setInterval(backward, 100);
+        revArray.push(token);
+      }
+      function Brake() {
+        var token = tokenArray.pop();
+        if (token != undefined) {
+          window.clearInterval(token);
+        }
+        if (tokenArray.length == 0) {
+          document.getElementById("brakeBtn").disabled = "disabled";
+        }
+      }
+      function handBrake() {
+        var token = tokenArray.pop();
+        while (token != undefined) {
+          window.clearInterval(token);
+          token = tokenArray.pop();
+        }
+      }
+
+      function keyFunction(event) {
+        if (event.key == "a" || "A") {
+          Accelerate();
+        } else if (event.key == "r" || "R") {
+          Reverse();
+        }
+      }
+    </script>
+  </body>
+</html>

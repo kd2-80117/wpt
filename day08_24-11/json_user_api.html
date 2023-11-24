@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <center>
+      <h1>Json Data</h1>
+      <table border="1">
+        <thead>
+          <th>Id</th>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Photo</th>
+        </thead>
+        <tbody id="tbodyId"></tbody>
+      </table>
+    </center>
+    <script>
+      debugger;
+      var helper = new XMLHttpRequest();
+      helper.onreadystatechange = () => {
+        console.log(helper.readyState);
+
+        if (helper.readyState == 4 && helper.status == 200) {
+          var employees = JSON.parse(helper.responseText).data;
+          var reftbody = document.getElementById("tbodyId");
+          for (let i = 0; i < employees.length; i++) {
+            var emp = employees[i];
+
+            var row =
+              `<tr><td>` +
+              emp.id +
+              `</td>
+            <td>` +
+              emp.email +
+              `</td>
+            <td>` +
+              emp.first_name +
+              `</td>
+            <td>` +
+              emp.last_name +
+              `</td>
+            <td><img src="` +
+              emp.avatar +
+              `"</td></tr>`;
+            reftbody.innerHTML = reftbody.innerHTML + row;
+          }
+        }
+      };
+      helper.open("GET", "https://reqres.in/api/users");
+      helper.send();
+    </script>
+  </body>
+</html>
