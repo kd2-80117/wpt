@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Books</title>
+  </head>
+  <body>
+    <center>
+      <div>
+        Book Details:
+        <input id="inputId" type="text" />
+        <input type="button" value="search" onclick="search()" />
+        <hr />
+      </div>
+      <table style="width: 400px; text-align: center" border="1">
+        <thead>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Book Cover</th>
+        </thead>
+        <tbody id="tbodyId"></tbody>
+      </table>
+    </center>
+    <script>
+      function search() {
+        debugger;
+        var bookDetails = document.getElementById("inputId").value;
+        var urlPart = "https://www.googleapis.com/books/v1/volumes?q=";
+        var url = urlPart + bookDetails;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          var tbody = document.getElementById("tbodyId");
+          var result = JSON.parse(xhr.responseText);
+          if ((xhr.readyState = 4 && xhr.status == 200)) {
+            for (let i = 0; i < result.items.length; i++) {
+              var row = `<tr>
+            <td>${result.items[i].volumeInfo.title}</td>
+            <td>${result.items[i].volumeInfo.authors}</td>
+            <td><img src="${result.items[i].volumeInfo.imageLinks.smallThumbnail}"/></td>
+          </tr>`;
+              tbody.innerHTML = tbody.innerHTML + row;
+            }
+          }
+        };
+        xhr.open("GET", url);
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
