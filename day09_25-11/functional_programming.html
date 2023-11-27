@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    function SayHi(name) {}
+    var result = SayHi("Mahesh");
+    console.log(result); //every function returns something, if not mentioned anything then it will return undefined
+
+    function SayHi(name) {
+      console.log("Hello " + name);
+    }
+
+    var SayHi = function (name) {
+      console.log("Hello " + name);
+    };
+
+    SayHi("mahesh");
+
+    console.log(typeof SayHi);
+    //class using literal syntax
+    var Person = {
+      no: 1,
+      name: "ritu",
+      print: function () {
+        console.log(this.no + " " + this.name);
+      },
+    };
+    Person.print();
+    Person.name = "isha";
+    Person.print();
+    var emp = {};
+    emp.__proto__ = Person;
+    emp.print();
+    console.log(emp.toString());
+  </script>
+</html>

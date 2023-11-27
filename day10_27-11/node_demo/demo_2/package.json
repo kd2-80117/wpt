@@ -1,0 +1,15 @@
+{
+  "name": "demo_2",
+  "version": "1.0.0",
+  "description": "demo of npm package.json file",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ritu",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.0.1",
+    "mysql": "^2.18.1"
+  }
+}
