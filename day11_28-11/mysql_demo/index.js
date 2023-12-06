@@ -18,7 +18,7 @@ const helper = http.createServer((request,response)=>{
         connection.query(mysql_query,(error,result)=>{
             if (error == null) {
                response.setHeader("content-Type","application/json");
-               var data= JSON.stringify(result)
+               var data= JSON.stringify(result);           
                 response.write(data);
                 connection.end();
                 response.end();

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Data</title>
+    <style>
+        .dataTd{
+            width: 60px;
+            height: 50px;
+        }
+        #msgDiv{
+          font-weight: bold;
+          color: green;
+        }
+    </style>
+  </head>
+  <body onload="getDataFromNodeServer()">
+    <center>
+      <table>
+        <tr>
+          <td>Enter Name</td>
+          <td><input id="nameId" type="text" /></td>
+          
+        </tr>
+        </tr>
+        <tr>
+          <td>Enter Address</td>
+          <td><input id="addId" type="text" /></td>
+        </tr>
+        
+        <tr>
+          
+          <td>
+            
+            <input
+              id="addBtn"
+              type="button"
+              value="Add Record"
+              onclick="postDataFromNodeServer()"
+            />
+          </td>
+          <td>
+            <input
+              id="resetBtn"
+              type="button"
+              value="Reset"
+              onclick="clearTextBox()"
+            />
+          
+            <input
+              id="editBtn"
+              type="button"
+              value="Update"
+              onclick="updateDataFromNodeServer()"
+            />
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <div id="msgDiv"></div>
+      <hr />
+      <table border="1">
+        <thead>
+          <th>No</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody id="tbodyId"></tbody>
+      </table>
+    </center>
+    <script>
+      var tbody = document.getElementById("tbodyId");
+      var txtName = document.getElementById("nameId");
+      var txtAdd = document.getElementById("addId");
+      var msgDiv = document.getElementById("msgDiv");
+        var allEmps =[];
+
+      function getDataFromNodeServer() {
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange = () => {
+          if (helper.readyState == 4 && helper.status == 200) {
+            var result = JSON.parse(helper.responseText);
+            tbody.innerHTML = "";
+            allEmps = [];
+            for (let i = 0; i < result.length; i++) {
+                
+              var row = result[i];
+              allEmps.push(row);
+              var record = `
+                <tr>
+                  <td class="dataTd">${row.no}</td>
+                  <td class="dataTd">${row.name}</td>
+                  <td class="dataTd">${row.address}</td>
+                  <td class="dataTd">
+                    <a href="#"><img width="60%" height="60%" src="edit.png" onclick="editData(${row.no})" /></a>
+                   </td>
+                  <td class="dataTd"> <a href="#"><img width="60%" height="60%" src="delete.png" onclick="deleteDataFromNodeServer(${row.no})" /></a></td>
+                </tr>
+              `;
+              tbody.innerHTML = tbody.innerHTML + record;
+            }
+          }
+        };
+        helper.open("GET", "http://127.0.0.1:9995/emp");
+        helper.send();
+      }
+
+      function postDataFromNodeServer() {
+        var txtName = document.getElementById("nameId");
+        var txtAdd = document.getElementById("addId");
+        var emp = {
+          name: txtName.value,
+          address: txtAdd.value,
+        };
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange = () => {
+          if (helper.readyState == 4 && helper.status == 200) {
+            var result = JSON.parse(helper.responseText);
+            if (result.affectedRows != undefined && result.affectedRows > 0) {
+              msgDiv.innerText="Data inserted Successfully!!!";
+              window.setTimeout(() => {
+                getDataFromNodeServer();
+                clearTextBox();
+                msgDiv.innerText="";
+              }, 3000);
+            }
+          }
+        };
+        helper.open("POST", "http://127.0.0.1:9995/emp");
+        helper.setRequestHeader("Content-Type", "application/json");
+
+        helper.send(JSON.stringify(emp));
+      }
+
+      var empToEdit={};
+
+      function editData(no){
+        console.log("no to be edited = "+no);
+        
+         for (let i = 0; i < allEmps.length; i++) {
+          empToEdit=allEmps[i];
+          if(allEmps[i].no==no){
+            break;
+          }
+         }
+         txtName.value=empToEdit.name;
+         txtAdd.value=empToEdit.address;
+      }
+      function updateDataFromNodeServer() {
+        console.log(empToEdit);
+        var empno = empToEdit.no;
+        
+        console.log(empno);
+        var empToUpdate={
+          name: txtName.value,
+          address: txtAdd.value
+        }
+        console.log(empToUpdate);
+       
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange = ()=>{
+          if(helper.readyState==4 && helper.status==200){
+            var result = JSON.parse(helper.responseText);
+            if(result.affectedRows!=undefined && result.affectedRows>0){
+              console.log("Record updated succssfully");
+              msgDiv.innerText="Record updated Succussfully!!!";
+              window.setTimeout(()=>{
+                getDataFromNodeServer();
+                msgDiv.innerHTML="";
+                clearTextBox();
+              },3000);
+            }
+          }
+        };
+      
+        helper.open("PUT","http://127.0.0.1:9995/emp/"+empno); 
+        helper.setRequestHeader("content-type","application/json");    
+        helper.send(JSON.stringify(empToUpdate));
+      }
+      
+      function deleteDataFromNodeServer(no) {
+        console.log("no to be deleted = "+no);
+        console.log("inside delete function");
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange=()=>{
+          if(helper.readyState==4 && helper.status==200){
+            var result= JSON.parse(helper.responseText);
+            if(result.affectedRows!=undefined && result.affectedRows>0){
+              console.log("Record deleted succssfully");
+              msgDiv.innerText="Record Deleted Succussfully!!!";
+              window.setTimeout(()=>{
+                getDataFromNodeServer();
+                msgDiv.innerHTML="";
+              },3000);
+            }
+          }
+        };
+        helper.open("DELETE","http://127.0.0.1:9995/emp/"+no);
+        helper.send();
+    }
+
+      function clearTextBox() {
+        txtName.value = "";
+        txtAdd.value = "";
+      }
+    </script>
+  </body>
+</html>

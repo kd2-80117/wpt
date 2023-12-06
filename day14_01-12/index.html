@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery practice</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <style>
+      div,
+      section {
+        width: 100px;
+        height: 100px;
+        display: inline-flex;
+        border: 1px solid black;
+      }
+      .a {
+        background-color: cornflowerblue;
+      }
+      .b {
+        background-color: coral;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+
+    <section title="chd" id="sectionId" class="a">5</section>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <div id="1" title="pune" class="a">1</div>
+    <div id="2" title="mumbai" class="b">2</div>
+    <div id="3" title="panji" class="a">3</div>
+    <div id="4" title="vapi" class="b">4</div>
+    <input type="text" value="hello" />
+    <button onclick="doSomething()">submit</button>
+    <script>
+      function something() {
+        //debugger;
+        //$("#1").css({ "background-color": "yellow" });
+        $(".a").css({ "background-color": "coral" });
+        $(".b").css({ "background-color": "cornflowerblue" });
+        $("input").val("ritu");
+        location.reload(true);
+      }
+
+      function doSomething() {
+        window.setInterval(something(), 1000);
+      }
+    </script>
+  </body>
+</html>

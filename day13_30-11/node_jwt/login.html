@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+  </head>
+  <style>
+    div {
+      position: relative;
+      margin-top: 5%;
+      left: 35%;
+      width: 400px;
+      height: 300px;
+      border: 1px solid black;
+    }
+    button {
+      position: relative;
+      left: 70%;
+    }
+  </style>
+  <body>
+    <div>
+      <center>
+        <br />
+        <h1>Login Page</h1>
+        <br />
+
+        Username: <input type="text" id="textName" /> <br />
+        <br />
+        Password: <input type="password" id="textPassword" /> <br /><br /><br />
+      </center>
+      <button onclick="login()">Login</button>
+      <!-- <div id="divMessage" style="background-color: gainsboro"></div> -->
+    </div>
+    <script>
+      function login() {
+        var textName = document.getElementById("textName");
+        var textPassword = document.getElementById("textPassword");
+        var refToDivMessage = document.getElementById("divMessage");
+        var credentials = {
+          username: textName.value,
+          password: textPassword.value,
+        };
+        //console.log(credentials);
+        var helper = new XMLHttpRequest();
+        helper.onreadystatechange = () => {
+          if (helper.readyState == 4 && helper.status == 200) {
+            var result = JSON.parse(helper.responseText);
+            console.log("hello from login.html");
+            if (result.message == undefined) {
+              //valid token
+              window.sessionStorage.setItem("token", result.jwtToken);
+              window.location.href = "emp.html";
+            } else {
+              //invalid token
+              alert("Invalid credentials!");
+              //refToDivMessage.innerText = result.message;
+            }
+          }
+        };
+        helper.open("POST", "http://127.0.0.1:5555/login");
+        console.log(credentials);
+        helper.setRequestHeader("content-type", "application/json");
+        helper.send(JSON.stringify(credentials));
+      }
+    </script>
+  </body>
+</html>

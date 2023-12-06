@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="q1.css" />
+    <title>Question-1</title>
+  </head>
+
+  <body>
+    <center>
+      <h1>Customer Registration</h1>
+      <table id="formTable">
+        <tr>
+          <td>Cnum</td>
+          <td>
+            <input type="text" placeholder="12" id="cnum" />
+          </td>
+          <td>
+            <p id="cnumErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Cname</td>
+          <td>
+            <input type="text" placeholder="Ritu" id="cname" />
+          </td>
+          <td>
+            <p id="cnameErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>
+            <input type="text" placeholder="ritu@gmail.com" id="email" />
+          </td>
+          <td>
+            <p id="emailErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>
+            <input type="password" placeholder="*****" id="pass" />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Confirm_Password</td>
+          <td>
+            <input type="password" placeholder="*****" id="cnf_pass" />
+          </td>
+          <td>
+            <p id="passErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Mobile_No</td>
+          <td>
+            <input type="text" placeholder="1234567890" id="mob" />
+          </td>
+          <td>
+            <p id="mobErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>City</td>
+          <td>
+            <input type="text" placeholder="Pune" id="city" />
+          </td>
+          <td>
+            <p id="cityErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td>
+            <select id="state">
+              <option>Select State</option>
+              <option>Maharashtra</option>
+              <option>Madhya Pradesh</option>
+              <option>Assam</option>
+              <option>Punjab</option>
+            </select>
+          </td>
+          <td>
+            <p id="stateErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Pincode</td>
+          <td>
+            <input type="text" placeholder="411001" id="pincode" />
+          </td>
+          <td>
+            <p id="pincodeErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>Request_Payment_Mode</td>
+          <td>
+            <input type="checkbox" value="Credit" />Credit
+            <input type="checkbox" value="Debit" />Debit
+            <input type="checkbox" value="UPI" />UPI
+          </td>
+          <td>
+            <p id="checksErr"></p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"><hr /></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align: center">
+            <input
+              type="submit"
+              value="Submit"
+              onclick="formSubmit()"
+              id="submitBtn"
+            />
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <script src="q1.js"></script>
+  </body>
+</html>

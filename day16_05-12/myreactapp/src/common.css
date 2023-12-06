@@ -1,0 +1,12 @@
+.logo{
+    height: 100px;
+    width: 100px;
+}
+.companyTitle{
+    padding-left: 10%;
+    display: inline-flex;
+}
+.icon{
+    height: 50px;
+    width: 50px;
+}

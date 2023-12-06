@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+  </head>
+  <style>
+    div {
+      position: relative;
+      margin-top: 5%;
+      left: 35%;
+      width: 400px;
+      height: 300px;
+      border: 1px solid black;
+    }
+    button {
+      position: relative;
+      left: 70%;
+    }
+  </style>
+  <body>
+    <div>
+      <center>
+        <br />
+        <h1>Login Page</h1>
+        <br />
+
+        Mobile no: <input type="text" id="textMob" /> <br />
+        <br />
+        Pin: <input type="password" id="textPin" /> <br /><br /><br />
+      </center>
+      <button onclick="login()">Login</button>
+    </div>
+    <script>
+      function login() {
+        var textMob = document.getElementById("textMob");
+        var textPin = document.getElementById("textPin");
+
+        const helper = new XMLHttpRequest();
+        helper.onreadystatechange = () => {};
+        helper.open();
+        helper.send();
+      }
+    </script>
+  </body>
+</html>
