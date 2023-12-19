@@ -1,0 +1,7 @@
+{
+    "host":"localhost",
+    "database":"customers",
+    "user":"root",
+    "password":"manager",
+    "port":5000
+}
